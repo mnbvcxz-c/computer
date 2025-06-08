@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Basics for Absolute Beginners</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background: #2E8B57;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            background: #333;
+            padding: 0.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            margin: 0 0.3rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            background: #2E8B57;
+        }
+        
+        main {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: white;
+            margin: 0;
+            font-size: 2.2rem;
+        }
+        
+        h2 {
+            color: #2E8B57;
+            border-bottom: 2px solid #2E8B57;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #333;
+            margin-top: 1.5rem;
+        }
+        
+        .computer-img {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn {
+            background: #2E8B57;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #3CB371;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #333;
+            color: white;
+        }
+        
+        .google-link {
+            color: #1A73E8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .google-link:hover {
+            text-decoration: underline;
+        }
+        
+        .tip-box {
+            background: #F0FFF0;
+            border-left: 4px solid #2E8B57;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .part-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .part-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Computer Basics for Absolute Beginners</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#parts">Computer Parts</a></li>
+            <li><a href="#os">Operating Systems</a></li>
+            <li><a href="#internet">Internet Basics</a></li>
+            <li><a href="#tips">Beginner Tips</a></li>
+            <li><a href="#contact">Help</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section id="home">
+            <h2>Getting Started with Computers</h2>
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Computer setup" class="computer-img">
+            <p>Welcome to your computer learning journey! This guide will help you understand the basics of using a computer, whether you're using one for the first time or just want to improve your skills.</p>
+            
+            <div class="tip-box">
+                <h3>Did You Know?</h3>
+                <p>The first computer mouse was made of wood in 1964! Today we use much more advanced devices.</p>
+                <a href="https://www.google.com/search?q=history+of+computer+mouse" class="google-link" target="_blank">Search Google for computer mouse history →</a>
+            </div>
+            
+            <a href="#parts" class="btn">Start Learning Computer Parts</a>
+        </section>
+        
+        <section id="parts">
+            <h2>Basic Computer Components</h2>
+            <p>Every computer is made up of these essential parts:</p>
+            
+            <div class="parts-grid">
+                <div class="part-card">
+                    <h3>Monitor</h3>
+                    <p>The screen that displays information visually.</p>
+                    <a href="https://www.google.com/search?q=computer+monitor+for+beginners" class="google-link" target="_blank">Learn more →</a>
+                </div>
+                
+                <div class="part-card">
+                    <h3>Keyboard</h3>
+                    <p>Used for typing text and entering commands.</p>
+                    <a href="https://www.google.com/search?q=computer+keyboard+basics" class="google-link" target="_blank">Learn more →</a>
+                </div>
+                
+                <div class="part-card">
+                    <h3>Mouse</h3>
+                    <p>Pointing device that controls the cursor on screen.</p>
+                    <a href="https://www.google.com/search?q=how+to+use+computer+mouse" class="google-link" target="_blank">Learn more →</a>
+                </div>
+                
+                <div class="part-card">
+                    <h3>CPU (Tower)</h3>
+                    <p>The "brain" that processes all computer operations.</p>
+                    <a href="https://www.google.com/search?q=what+is+cpu+computer" class="google-link" target="_blank">Learn more →</a>
+                </div>
+            </div>
+            
+            <h3>Other Important Components:</h3>
+            <ul>
+                <li><strong>Printer:</strong> Outputs documents and photos on paper <a href="https://www.google.com/search?q=how+to+use+computer+printer" class="google-link" target="_blank">(Learn more)</a></li>
+                <li><strong>Speakers:</strong> Produce sound from your computer <a href="https://www.google.com/search?q=computer+speakers+setup" class="google-link" target="_blank">(Learn more)</a></li>
+                <li><strong>Webcam:</strong> Camera for video calls and photos <a href="https://www.google.com/search?q=how+to+use+computer+webcam" class="google-link" target="_blank">(Learn more)</a></li>
+            </ul>
+            
+            <a href="#os" class="btn">Next: Learn About Operating Systems</a>
+        </section>
+        
+        <section id="os">
+            <h2>Understanding Operating Systems</h2>
+            <p>An operating system (OS) is the software that manages all computer operations. The most common ones are:</p>
+            
+            <div class="parts-grid">
+                <div class="part-card">
+                    <h3>Windows</h3>
+                    <p>Microsoft's OS used on most PCs. Current version: Windows 11.</p>
+                    <a href="https://www.google.com/search?q=windows+for+beginners" class="google-link" target="_blank">Learn Windows →</a>
+                </div>
+                
+                <div class="part-card">
+                    <h3>macOS</h3>
+                    <p>Apple's operating system for Mac computers.</p>
+                    <a href="https://www.google.com/search?q=macos+for+beginners" class="google-link" target="_blank">Learn macOS →</a>
+                </div>
+                
+                <div class="part-card">
+                    <h3>Chrome OS</h3>
+                    <p>Simple OS used on Chromebooks, based on Chrome browser.</p>
+                    <a href="https://www.google.com/search?q=chrome+os+for+beginners" class="google-link" target="_blank">Learn Chrome OS →</a>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h3>How to Check Your OS</h3>
+                <p>On Windows: Right-click "This PC" > Properties<br>
+                On Mac: Click Apple logo > About This Mac</p>
+                <a href="https://www.google.com/search?q=what+operating+system+do+i+have" class="google-link" target="_blank">Search for more details →</a>
+            </div>
+            
+            <a href="#internet" class="btn">Next: Internet Basics</a>
+        </section>
+        
+        <section id="internet">
+            <h2>Internet Basics</h2>
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Internet concept" class="computer-img">
+            
+            <h3>Web Browsers</h3>
+            <p>Programs used to access the internet:</p>
+            <ul>
+                <li>Google Chrome <a href="https://www.google.com/search?q=how+to+use+google+chrome" class="google-link" target="_blank">(Guide)</a></li>
+                <li>Microsoft Edge <a href="https://www.google.com/search?q=how+to+use+microsoft+edge" class="google-link" target="_blank">(Guide)</a></li>
+                <li>Mozilla Firefox <a href="https://www.google.com/search?q=how+to+use+firefox" class="google-link" target="_blank">(Guide)</a></li>
+                <li>Safari (on Mac) <a href="https://www.google.com/search?q=how+to+use+safari" class="google-link" target="_blank">(Guide)</a></li>
+            </ul>
+            
+            <h3>Basic Internet Skills</h3>
+            <ol>
+                <li>How to search on Google <a href="https://www.google.com/search?q=how+to+search+on+google" class="google-link" target="_blank">(Tutorial)</a></li>
+                <li>Sending and receiving email <a href="https://www.google.com/search?q=how+to+use+email" class="google-link" target="_blank">(Tutorial)</a></li>
+                <li>Online safety basics <a href="https://www.google.com/search?q=internet+safety+for+beginners" class="google-link" target="_blank">(Guide)</a></li>
+                <li>Video calling with Zoom/Skype <a href="https://www.google.com/search?q=how+to+use+zoom+for+beginners" class="google-link" target="_blank">(Zoom Guide)</a></li>
+            </ol>
+            
+            <a href="#tips" class="btn">Next: Helpful Computer Tips</a>
+        </section>
+        
+        <section id="tips">
+            <h2>Essential Computer Tips for Beginners</h2>
+            
+            <div class="tip-box">
+                <h3>Keyboard Shortcuts</h3>
+                <ul>
+                    <li><strong>Ctrl+C:</strong> Copy selected item</li>
+                    <li><strong>Ctrl+V:</strong> Paste copied item</li>
+                    <li><strong>Ctrl+Z:</strong> Undo last action</li>
+                    <li><strong>Alt+Tab:</strong> Switch between open programs</li>
+                </ul>
+                <a href="https://www.google.com/search?q=basic+computer+shortcuts" class="google-link" target="_blank">Search for more shortcuts →</a>
+            </div>
+            
+            <h3>File Management</h3>
+            <p>Keep your files organized with these practices:</p>
+            <ol>
+                <li>Create folders for different projects</li>
+                <li>Give files clear, descriptive names</li>
+                <li>Regularly backup important files</li>
+                <li>Learn about cloud storage options</li>
+            </ol>
+            <a href="https://www.google.com/search?q=how+to+organize+computer+files" class="google-link" target="_blank">Learn file organization →</a>
+            
+            <h3>Troubleshooting Basics</h3>
+            <ul>
+                <li>Restart your computer if something isn't working</li>
+                <li>Check all cables are connected properly</li>
+                <li>Search for your problem online (e.g., "how to fix printer not working")</li>
+                <li>Ask for help when needed</li>
+            </ul>
+            
+            <button id="tipButton" class="btn">Show Me Another Random Tip</button>
+            <div id="extraTip" class="tip-box" style="display:none;"></div>
+        </section>
+        
+        <section id="contact">
+            <h2>Getting Help with Computers</h2>
+            
+            <h3>Free Learning Resources</h3>
+            <ul>
+                <li><a href="https://www.google.com/search?q=free+computer+classes+near+me" class="google-link" target="_blank">Search for local computer classes</a></li>
+                <li><a href="https://www.youtube.com/results?search_query=computer+basics+for+beginners" class="google-link" target="_blank">YouTube computer tutorials</a></li>
+                <li><a href="https://www.google.com/search?q=computer+basics+pdf" class="google-link" target="_blank">Free computer guides in PDF</a></li>
+                <li>Visit your local library's computer help desk</li>
+            </ul>
+            
+            <h3>Practice Exercises</h3>
+            <p>Try these to improve your skills:</p>
+            <ol>
+                <li>Create a document and practice typing</li>
+                <li>Organize your files into folders</li>
+                <li>Send an email to a friend or family member</li>
+                <li>Search for something you want to learn</li>
+            </ol>
+            
+            <div class="tip-box">
+                <h3>Remember!</h3>
+                <p>Every computer expert started as a beginner. With practice, you'll improve every day!</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Computer Basics Guide | Made for Absolute Beginners</p>
+        <p>All Google links open in new tabs for your convenience</p>
+    </footer>
+    
+    <script>
+        // JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Array of additional tips
+            const extraTips = [
+                {
+                    tip: "You can zoom in on any webpage by pressing Ctrl and + (plus) together",
+                    link: "https://www.google.com/search?q=how+to+zoom+web+pages"
+                },
+                {
+                    tip: "Right-clicking items often shows useful options you can select",
+                    link: "https://www.google.com/search?q=what+does+right+click+do"
+                },
+                {
+                    tip: "The Print Screen key takes a picture of your screen you can paste elsewhere",
+                    link: "https://www.google.com/search?q=how+to+use+print+screen"
+                },
+                {
+                    tip: "Most programs have a Help menu with tutorials and troubleshooting",
+                    link: "https://www.google.com/search?q=how+to+use+help+menu"
+                },
+                {
+                    tip: "You can usually recover accidentally deleted files from the Recycle Bin",
+                    link: "https://www.google.com/search?q=how+to+recover+deleted+files"
+                }
+            ];
+            
+            // Button to show random tips
+            const tipButton = document.getElementById('tipButton');
+            const extraTipBox = document.getElementById('extraTip');
+            
+            tipButton.addEventListener('click', function() {
+                const randomTip = extraTips[Math.floor(Math.random() * extraTips.length)];
+                extraTipBox.innerHTML = `
+                    <h3>Bonus Tip:</h3>
+                    <p>${randomTip.tip}</p>
+                    <a href="${randomTip.link}" class="google-link" target="_blank">Learn more about this →</a>
+                `;
+                extraTipBox.style.display = 'block';
+                
+                // Smooth scroll to the tip
+                extraTipBox.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Simple animation for all buttons
+            const buttons = document.querySelectorAll('button, .btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                button.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
