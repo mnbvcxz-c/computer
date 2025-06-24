@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ERNEST TECHS</title>
+  <style>
+    /* Reset & basic */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0 1rem;
+      background: #f4f6f8;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 2rem;
+    }
+
+    /* Controls Section */
+    #controls {
+      max-width: 700px;
+      margin: 2rem auto 1rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    #search-input {
+      flex-grow: 1;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #category-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .category-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .category-button:hover,
+    .category-button.active {
+      background-color: #0056b3;
+    }
+
+    /* Tutorial List */
+    #tutorial-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .tutorial-card {
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 1.2rem;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .tutorial-card:hover,
+    .tutorial-card:focus {
+      background-color: #e7f0ff;
+      outline: none;
+    }
+
+    .tutorial-title {
+      margin: 0 0 0.5rem 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #004085;
+    }
+
+    .tutorial-summary {
+      margin: 0;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .tutorial-category {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #888;
+    }
+
+    .topics-list {
+      margin-top: 0.5rem;
+    }
+
+    .topic-tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #2c3e9f;
+      border-radius: 15px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.8rem;
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+      user-select: none;
+      cursor: default;
+    }
+
+    /* Tutorial Detail */
+    #tutorial-detail {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      display: none;
+    }
+
+    #back-button {
+      margin: 1rem auto 2rem auto;
+      display: block;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #back-button:hover,
+    #back-button:focus {
+      background: #0056b3;
+      outline: none;
+    }
+
+    /* Content inside tutorial detail */
+    #tutorial-detail h2,
+    #tutorial-detail h3 {
+      color: #004085;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #tutorial-detail p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    #tutorial-detail code {
+      background: #eee;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    #tutorial-detail .topics-list {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    #tutorial-detail .topic-tag {
+      background: #cce5ff;
+      color: #003366;
+      cursor: default;
+    }
+
+    /* Notes Section */
+    #tutorial-detail .notes {
+      background: #fff9db;
+      border-left: 5px solid #ffcc00;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      border-radius: 6px;
+    }
+
+    #tutorial-detail .notes h3 {
+      margin-top: 0;
+      color: #b37b00;
+    }
+
+    #tutorial-detail .notes ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    /* Examples Section */
+    #tutorial-detail .examples {
+      margin-bottom: 2rem;
+    }
+
+    #tutorial-detail .examples h3 {
+      margin-top: 0;
+      color: #004085;
+    }
+
+    #tutorial-detail .example {
+      margin-bottom: 1.5rem;
+    }
+
+    #tutorial-detail .example-title {
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+      color: #2c3e9f;
+    }
+
+    #tutorial-detail pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Source Code Pro', monospace, monospace;
+      font-size: 0.95rem;
+    }
+
+    /* YouTube embed styling */
+    #tutorial-detail iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border: none;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 0 0.5rem;
+      }
+
+      #controls {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+
+      #tutorial-list, #tutorial-detail {
+        margin: 1rem auto;
+        width: 100%;
+      }
+
+      #tutorial-detail iframe {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ERNEST TECHS</h1>
+  </header>
+
+  <section id="controls">
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Search tutorials by title, category, or topic..."
+      aria-label="Search tutorials"
+    />
+    <div id="category-filters">
+      <!-- Category buttons will load here -->
+    </div>
+  </section>
+
+  <main id="tutorial-list" aria-live="polite">
+    <!-- Tutorials will load here -->
+  </main>
+
+  <section id="tutorial-detail" tabindex="-1" aria-live="polite" aria-label="Tutorial details">
+    <!-- Tutorial detail content will load here -->
+  </section>
+
+  <footer>
+    <p>© 2025 ERNEST TECHS</p>
+  </footer>
+
+  <script>
+    // Data: Tutorials Array with 9 programming languages, 3 videos each, notes, examples, topics & content
+    const tutorials = [
+      {
+        id: 1,
+        title: "Learn JavaScript Basics",
+        category: "JavaScript",
+        summary: "Introduction to JavaScript, variables, functions, and loops.",
+        topics: ["variables", "functions", "loops", "syntax", "basics"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/W6NZfCO5SIk",
+          "https://www.youtube.com/embed/PkZNo7MFNFg",
+          "https://www.youtube.com/embed/hdI2bqOjy3c"
+        ],
+        notes: [
+          "JavaScript is case sensitive.",
+          "Use const for variables that won't change.",
+          "Functions can be declared or expressed as arrow functions."
+        ],
+        examples: [
+          {
+            title: "Declaring a variable",
+            code: `let age = 25;
+const name = "Alice";`
+          },
+          {
+            title: "Basic function",
+            code: `function greet() {
+  console.log("Hello, world!");
+}`
+          },
+          {
+            title: "For loop example",
+            code: `for (let i = 0; i < 5; i++) {
+  console.log(i);
+}`
+          }
+        ],
+        content: `
+          <h2>Learn JavaScript Basics</h2>
+          <p>JavaScript is a versatile programming language used for web development.</p>
+          <h3>Variables</h3>
+          <p>Variables store data values. Use <code>let</code> or <code>const</code>.</p>
+          <h3>Functions</h3>
+          <p>Functions group code you want to reuse.</p>
+          <h3>Loops</h3>
+          <p>Loops repeat actions, like <code>for</code> and <code>while</code>.</p>
+        `
+      },
+      {
+        id: 2,
+        title: "CSS Flexbox Guide",
+        category: "CSS",
+        summary: "Learn how to use Flexbox for responsive layouts.",
+        topics: ["flexbox", "layout", "responsive", "css3"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/JJSoEo8JSnc",
+          "https://www.youtube.com/embed/fYq5PXgSsbE",
+          "https://www.youtube.com/embed/3YW65K6LcIA"
+        ],
+        notes: [
+          "Flexbox works in one dimension at a time (row or column).",
+          "Use 'justify-content' to align items horizontally.",
+          "Use 'align-items' to align items vertically."
+        ],
+        examples: [
+          {
+            title: "Basic flex container",
+            code: `.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}`
+          },
+          {
+            title: "Flex item grow",
+            code: `.item {
+  flex-grow: 1;
+}`
+          }
+        ],
+        content: `
+          <h2>CSS Flexbox Guide</h2>
+          <p>Flexbox is a CSS layout model for arranging elements in one dimension.</p>
+          <h3>Display Flex</h3>
+          <p>Apply <code>display: flex;</code> to a container to start using Flexbox.</p>
+          <h3>Justify Content</h3>
+          <p>Controls horizontal alignment.</p>
+          <h3>Align Items</h3>
+          <p>Controls vertical alignment.</p>
+        `
+      },
+      {
+        id: 3,
+        title: "Understanding Async/Await",
+        category: "JavaScript",
+        summary: "Simplify asynchronous code using async and await.",
+        topics: ["async", "await", "promises", "asynchronous", "javascript"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/V_Kr9OSfDeU",
+          "https://www.youtube.com/embed/_8gHHBlbziw",
+          "https://www.youtube.com/embed/PoRJizFvM7s"
+        ],
+        notes: [
+          "Async functions always return a Promise.",
+          "Await pauses execution until the Promise resolves.",
+          "Use try/catch to handle errors in async functions."
+        ],
+        examples: [
+          {
+            title: "Async function example",
+            code: `async function fetchData() {
+  try {
+    let response = await fetch('https://api.example.com/data');
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}`
+          }
+        ],
+        content: `
+          <h2>Understanding Async/Await</h2>
+          <p>Async/Await makes writing asynchronous code easier and more readable.</p>
+          <h3>Async Functions</h3>
+          <p>Functions declared with <code>async</code> return a Promise.</p>
+          <h3>Await Keyword</h3>
+          <p>Use <code>await</code> to pause execution until a Promise resolves.</p>
+        `
+      },
+      {
+        id: 4,
+        title: "Getting Started with HTML5",
+        category: "HTML",
+        summary: "Basics of HTML5 structure and semantic tags.",
+        topics: ["html5", "semantic", "structure", "tags"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/UB1O30fR-EE",
+          "https://www.youtube.com/embed/3JluqTojuME",
+          "https://www.youtube.com/embed/qz0aGYrrlhU"
+        ],
+        notes: [
+          "Semantic tags improve accessibility and SEO.",
+          "Use <header>, <footer>, <nav>, <article> for clearer structure.",
+          "New input types help with validation and user experience."
+        ],
+        examples: [
+          {
+            title: "Basic HTML5 structure",
+            code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Example</title>
+</head>
+<body>
+  <header>My Website Header</header>
+  <nav>Navigation Links</nav>
+  <article>Page Content</article>
+  <footer>Footer Info</footer>
+</body>
+</html>`
+          }
+        ],
+        content: `
+          <h2>Getting Started with HTML5</h2>
+          <p>HTML5 introduced new semantic elements to better structure web pages.</p>
+          <h3>Semantic Tags</h3>
+          <p>Examples: <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>.</p>
+          <h3>New Form Elements</h3>
+          <p>HTML5 supports new input types like <code>email</code>, <code>date</code>, and more.</p>
+        `
+      },
+      {
+        id: 5,
+        title: "Python for Beginners",
+        category: "Python",
+        summary: "Introduction to Python programming language basics.",
+        topics: ["python", "variables", "functions", "syntax", "basics"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/_uQrJ0TkZlc",
+          "https://www.youtube.com/embed/rfscVS0vtbw",
+          "https://www.youtube.com/embed/HGOBQPFzWKo"
+        ],
+        notes: [
+          "Python uses indentation to define code blocks.",
+          "Variables do not require explicit declaration.",
+          "Functions are defined using the 'def' keyword."
+        ],
+        examples: [
+          {
+            title: "Declaring variables",
+            code: `age = 25
+name = "Alice"`
+          },
+          {
+            title: "Basic function",
+            code: `def greet():
+  print("Hello, world!")`
+          },
+          {
+            title: "For loop example",
+            code: `for i in range(5):
+  print(i)`
+          }
+        ],
+        content: `
+          <h2>Python for Beginners</h2>
+          <p>Python is a versatile, high-level programming language widely used in many fields.</p>
+          <h3>Variables</h3>
+          <p>Python variables do not need explicit type declaration.</p>
+          <h3>Functions</h3>
+          <p>Functions help organize reusable code blocks.</p>
+          <h3>Loops</h3>
+          <p>Python has 'for' and 'while' loops for repetition.</p>
+        `
+      },
+      {
+        id: 6,
+        title: "Java Programming Basics",
+        category: "Java",
+        summary: "Learn fundamental Java programming concepts.",
+        topics: ["java", "syntax", "variables", "oop", "basics"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/grEKMHGYyns",
+          "https://www.youtube.com/embed/eIrMbAQSU34",
+          "https://www.youtube.com/embed/3u1fu6f8Hto"
+        ],
+        notes: [
+          "Java is strongly typed and object-oriented.",
+          "The main method is the entry point of any Java application.",
+          "Use classes to structure your code."
+        ],
+        examples: [
+          {
+            title: "Hello World program",
+            code: `public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+  }
+}`
+          },
+          {
+            title: "Variable declaration",
+            code: `int age = 25;
+String name = "Alice";`
+          },
+          {
+            title: "Basic class example",
+            code: `public class Person {
+  String name;
+  int age;
+}`
+          }
+        ],
+        content: `
+          <h2>Java Programming Basics</h2>
+          <p>Java is a popular programming language used for many types of software development.</p>
+          <h3>Syntax</h3>
+          <p>Java syntax is similar to C++ but enforces strict object-oriented principles.</p>
+          <h3>Variables</h3>
+          <p>Variables must be declared with a type.</p>
+          <h3>Classes & Objects</h3>
+          <p>Everything in Java is part of a class.</p>
+        `
+      },
+      {
+        id: 7,
+        title: "Introduction to C#",
+        category: "C#",
+        summary: "Basics of C# programming for Windows and web apps.",
+        topics: ["c#", "dotnet", "syntax", "variables", "basics"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/GhQdlIFylQ8",
+          "https://www.youtube.com/embed/1Ot0u1iN54g",
+          "https://www.youtube.com/embed/IzNQK8u9Fzo"
+        ],
+        notes: [
+          "C# is a modern object-oriented programming language developed by Microsoft.",
+          "It is commonly used with the .NET framework.",
+          "The 'Main' method is the entry point of a C# program."
+        ],
+        examples: [
+          {
+            title: "Hello World program",
+            code: `using System;
+
+class Program {
+  static void Main() {
+    Console.WriteLine("Hello, world!");
+  }
+}`
+          },
+          {
+            title: "Variable declaration",
+            code: `int age = 25;
+string name = "Alice";`
+          },
+          {
+            title: "Simple class",
+            code: `public class Person {
+  public string Name { get; set; }
+  public int Age { get; set; }
+}`
+          }
+        ],
+        content: `
+          <h2>Introduction to C#</h2>
+          <p>C# is widely used for Windows desktop applications, games, and web backends.</p>
+          <h3>Syntax</h3>
+          <p>C# syntax is clean and similar to Java and C++.</p>
+          <h3>Variables & Types</h3>
+          <p>Strongly typed language with support for many types.</p>
+          <h3>Classes</h3>
+          <p>Everything in C# revolves around classes and objects.</p>
+        `
+      },
+      {
+        id: 8,
+        title: "Ruby Programming Fundamentals",
+        category: "Ruby",
+        summary: "Learn Ruby syntax and basic programming concepts.",
+        topics: ["ruby", "syntax", "variables", "oop", "basics"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/t_ispmWmdjY",
+          "https://www.youtube.com/embed/4wFZYY6v5Eo",
+          "https://www.youtube.com/embed/2eebptXfEvw"
+        ],
+        notes: [
+          "Ruby is known for its elegant and readable syntax.",
+          "Everything in Ruby is an object.",
+          "Methods can be called without parentheses."
+        ],
+        examples: [
+          {
+            title: "Hello World program",
+            code: `puts "Hello, world!"`
+          },
+          {
+            title: "Variable assignment",
+            code: `name = "Alice"
+age = 25`
+          },
+          {
+            title: "Defining a method",
+            code: `def greet
+  puts "Hello!"
+end`
+          }
+        ],
+        content: `
+          <h2>Ruby Programming Fundamentals</h2>
+          <p>Ruby emphasizes simplicity and productivity with an elegant syntax.</p>
+          <h3>Syntax</h3>
+          <p>Ruby syntax is simple and expressive.</p>
+          <h3>Variables</h3>
+          <p>No type declarations needed.</p>
+          <h3>Methods</h3>
+          <p>Methods define reusable functionality.</p>
+        `
+      },
+      {
+        id: 9,
+        title: "PHP for Web Development",
+        category: "PHP",
+        summary: "Basics of PHP scripting for dynamic web pages.",
+        topics: ["php", "web", "server-side", "syntax", "basics"],
+        youtubeLinks: [
+          "https://www.youtube.com/embed/OK_JCtrrv-c",
+          "https://www.youtube.com/embed/Zd0j2vS6W6Q",
+          "https://www.youtube.com/embed/1Rs2ND1ryYc"
+        ],
+        notes: [
+          "PHP is a server-side scripting language.",
+          "Code runs on the server and outputs HTML.",
+          "Use <?php ... ?> tags to embed PHP in HTML."
+        ],
+        examples: [
+          {
+            title: "Basic PHP script",
+            code: `<?php
+echo "Hello, world!";
+?>`
+          },
+          {
+            title: "Variable usage",
+            code: `<?php
+$name = "Alice";
+echo "Hello, $name!";
+?>`
+          },
+          {
+            title: "If statement",
+            code: `<?php
+$age = 20;
+if ($age >= 18) {
+  echo "Adult";
+} else {
+  echo "Minor";
+}
+?>`
+          }
+        ],
+        content: `
+          <h2>PHP for Web Development</h2>
+          <p>PHP is widely used to create dynamic web content and applications.</p>
+          <h3>Syntax</h3>
+          <p>PHP scripts are embedded in HTML using PHP tags.</p>
+          <h3>Variables</h3>
+          <p>Variables start with a $ sign.</p>
+          <h3>Control Structures</h3>
+          <p>Use if-else, loops, and functions for logic.</p>
+        `
+      }
+    ];
+
+    // Get unique categories for filters
+    const categories = ["All", ...new Set(tutorials.map(t => t.category))];
+
+    // Render category buttons
+    const renderCategories = () => {
+      const container = document.getElementById("category-filters");
+      container.innerHTML = "";
+      categories.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.classList.add("category-button");
+        btn.textContent = cat;
+        btn.setAttribute("aria-pressed", "false");
+        btn.onclick = () => {
+          document.querySelectorAll(".category-button").forEach(b => {
+            b.classList.remove("active");
+            b.setAttribute("aria-pressed", "false");
+          });
+          btn.classList.add("active");
+          btn.setAttribute("aria-pressed", "true");
+
+          // Reset search input on category change
+          const searchInput = document.getElementById("search-input");
+          if (searchInput) searchInput.value = "";
+
+          renderTutorials(cat);
+        };
+        container.appendChild(btn);
+      });
+
+      // Set "All" active by default
+      const firstBtn = container.querySelector("button");
+      if (firstBtn) {
+        firstBtn.classList.add("active");
+        firstBtn.setAttribute("aria-pressed", "true");
+      }
+    };
+
+    // Render tutorials filtered by category and search
+    const renderTutorials = (category = "All", search = "") => {
+      const container = document.getElementById("tutorial-list");
+      container.innerHTML = "";
+
+      let filtered = tutorials;
+
+      if (category !== "All") {
+        filtered = filtered.filter(t => t.category.toLowerCase() === category.toLowerCase());
+      }
+
+      if (search.trim() !== "") {
+        const searchLower = search.toLowerCase();
+        filtered = filtered.filter(t =>
+          t.title.toLowerCase().includes(searchLower) ||
+          t.category.toLowerCase().includes(searchLower) ||
+          t.topics.some(topic => topic.toLowerCase().includes(searchLower))
+        );
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p>No tutorials found.</p>`;
+        return;
+      }
+
+      filtered.forEach(tutorial => {
+        const card = document.createElement("article");
+        card.className = "tutorial-card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `View tutorial: ${tutorial.title}`);
+
+        card.innerHTML = `
+          <h2 class="tutorial-title">${tutorial.title}</h2>
+          <p class="tutorial-summary">${tutorial.summary}</p>
+          <div class="tutorial-category">Category: ${tutorial.category}</div>
+        `;
+
+        // Click or keyboard enter to show detail
+        const showDetail = () => {
+          localStorage.setItem("selectedTutorialId", tutorial.id);
+          renderTutorialDetail();
+        };
+
+        card.onclick = showDetail;
+        card.onkeypress = (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            showDetail();
+          }
+        };
+
+        container.appendChild(card);
+      });
+    };
+
+    // Render detail for selected tutorial
+    const renderTutorialDetail = () => {
+      const container = document.getElementById("tutorial-detail");
+      const listContainer = document.getElementById("tutorial-list");
+
+      if (!container) return;
+
+      listContainer.style.display = "none";
+      container.style.display = "block";
+
+      const selectedId = localStorage.getItem("selectedTutorialId");
+      const tutorial = tutorials.find(t => t.id == selectedId);
+
+      if (tutorial) {
+        // Topics tags HTML
+        const topicsHtml = tutorial.topics
+          .map(topic => `<span class="topic-tag">${topic}</span>`)
+          .join(" ");
+
+        // Notes HTML
+        let notesHtml = "";
+        if (tutorial.notes && tutorial.notes.length) {
+          notesHtml = `
+            <section class="notes" aria-label="Notes about this tutorial">
+              <h3>Notes</h3>
+              <ul>
+                ${tutorial.notes.map(note => `<li>${note}</li>`).join("")}
+              </ul>
+            </section>
+          `;
+        }
+
+        // Examples HTML
+        let examplesHtml = "";
+        if (tutorial.examples && tutorial.examples.length) {
+          examplesHtml = `
+            <section class="examples" aria-label="Examples for this tutorial">
+              <h3>Examples</h3>
+              ${tutorial.examples.map(example => `
+                <div class="example">
+                  <div class="example-title">${example.title}</div>
+                  <pre>${example.code}</pre>
+                </div>
+              `).join("")}
+            </section>
+          `;
+        }
+
+        // Multiple YouTube iframes
+        const youtubeEmbedHtml = tutorial.youtubeLinks.map(link => `
+          <iframe
+            src="${link}"
+            title="YouTube tutorial video for ${tutorial.title}"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        `).join("");
+
+        container.innerHTML = `
+          <button id="back-button" aria-label="Back to tutorials list">← Back to Tutorials</button>
+          ${tutorial.content}
+          <div class="topics-list" aria-label="Topics">
+            <strong>Topics:</strong> ${topicsHtml}
+          </div>
+          ${notesHtml}
+          ${examplesHtml}
+          ${youtubeEmbedHtml}
+        `;
+
+        container.querySelector("#back-button").onclick = () => {
+          container.style.display = "none";
+          listContainer.style.display = "block";
+          window.scrollTo(0, 0);
+          // Clear selected tutorial id
+          localStorage.removeItem("selectedTutorialId");
+        };
+
+        container.focus();
+      } else {
+        container.innerHTML = "<p>Tutorial not found.</p>";
+      }
+    };
+
+    // Setup search input event handler
+    const setupSearch = () => {
+      const searchInput = document.getElementById("search-input");
+      if (!searchInput) return;
+
+      searchInput.addEventListener("input", () => {
+        const activeBtn = document.querySelector(".category-button.active");
+        const category = activeBtn ? activeBtn.textContent : "All";
+        renderTutorials(category, searchInput.value);
+      });
+    };
+
+    // On DOM load
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCategories();
+      renderTutorials();
+      setupSearch();
+    });
+  </script>
+</body>
+</html>
